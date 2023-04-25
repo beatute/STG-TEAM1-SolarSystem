@@ -1,10 +1,11 @@
 FROM python:3.9-slim
 
 WORKDIR /app
+EXPOSE 8000
 
-COPY requirements.txt /app/requirements.txt
-RUN pip install -r requirements.txt
+COPY Python_app /app
+RUN python -m pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
-COPY . /app
 
 CMD ["python", "app.py"]
