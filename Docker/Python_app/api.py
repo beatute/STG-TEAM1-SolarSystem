@@ -13,17 +13,17 @@ def create_planets(planets):
 
 
 def read_one_planets(id):
-    return db_data.get_one_planet(id), 200
+    return db_data.get_one_planet(planet_id), 200
 
 
-def delete_planets(id):
-    rows_affected = db_data.delete_planets(id)
+def delete_planets(planet_id):
+    rows_affected = db_data.delete_planets(planet_id)
 
     if rows_affected > 0:
-        return make_response(f"{id} planet successfully deleted", 200)
+        return make_response(f"{planet_id} planet successfully deleted", 200)
     else:
-        return make_response(f"Deletion of {id} failed. Planet not found.", 404)
+        return make_response(f"Deletion of {planet_id} failed. Planet not found.", 404)
 
 
-def update_planets(id, planets):
-    return db_data.update_planets(id, planets), 200
+def update_planets(planet_id, planets):
+    return db_data.update_planets(planet_id, planets), 200
