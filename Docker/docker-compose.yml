@@ -8,11 +8,6 @@ services:
       - "8000:8000"
     depends_on:
       - db
-    environment:
-##      DB_HOST: 127.0.0.0
-#      DB_USER: solaruser
-#      DB_PASSWORD: solarsystem
-#      DB_NAME: solar_system
   db:
     image: mysql:latest
     restart: always
