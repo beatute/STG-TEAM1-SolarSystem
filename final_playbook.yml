@@ -1,0 +1,10 @@
+---
+- hosts: sgt
+  become: true
+  roles:
+    - install
+    - user
+    - git
+    - application
+    - db
+    - delete

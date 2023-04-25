@@ -1,0 +1,27 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: 127.0.0.0
+      DB_USER: solaruser
+      DB_PASSWORD: solarsystem
+      DB_NAME: solar_system
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: solar_system
+      MYSQL_USER: solaruser
+      MYSQL_PASSWORD: sgt2023
+      MYSQL_ROOT_PASSWORD: sgt2023
+    volumes:
+      - ./data:/var/lib/mysql
+    ports:
+      - "3307:3306"
