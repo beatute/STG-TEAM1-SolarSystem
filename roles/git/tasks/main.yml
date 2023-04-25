@@ -1,0 +1,40 @@
+- name: Creates directory
+  ansible.builtin.file:
+    path: /home/solaruser/.shh
+    state: directory
+    owner: solaruser
+    group: admin
+    mode: 700
+
+- name: copy shh key pub
+  ansible.builtin.copy:
+    src: /home/sgtuser/keybeata.pub
+    dest: /home/solaruser/.shh/keybeata.pub
+    owner: solaruser
+    group: admin
+    mode: 700
+
+- name: copy shh key
+  ansible.builtin.copy:
+    src: /home/sgtuser/keybeata
+    dest: /home/solaruser/.shh/keybeata
+    owner: beatab
+    group: admin
+    mode: '0755'
+
+- name: Creates directory fot git repository
+  ansible.builtin.file:
+    path: /home/solaruser/solarsystem
+    state: directory
+    owner: solaruser
+    group: admin
+    mode: '0755'
+
+- name: clone repository
+  git:
+    repo: git@github.com:beatute/STG-TEAM1-SolarSystem.git
+    dest: /home/solaruser/solarsystem
+    accept_hostkey: yes
+    clone: yes
+    key_file: /home/solaruser/.shh/keybeata
+    update: yes

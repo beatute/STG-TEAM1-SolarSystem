@@ -1,0 +1,39 @@
+---
+- name: Create the folder
+  ansible.builtin.file:
+    path: /home/solaruser
+    state: directory
+    mode: '0755'
+
+- name: Create user
+  ansible.builtin.user:
+    name: solaruser
+    state: present
+    create_home: yes
+    password_lock: yes
+
+- name: Set correct ownership and permissions for user directory
+  ansible.builtin.file:
+    path: /home/solaruser
+    state: directory
+    owner: solaruser
+    group: admin
+    mode: "0700"
+
+- name: Ensure PubkeyAuthentication is set to yes in sshd_config
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PubkeyAuthentication'
+    line: "PubkeyAuthentication yes"
+
+- name: Set authorized key taken from file
+  ansible.posix.authorized_key:
+    user: sgtuser
+    state: present
+    key: keybeata, /home/sgtuser/
+
+- name: Restart sshd
+  ansible.builtin.systemd:
+    name: sshd
+    state: restarted
+    daemon_reload: yes

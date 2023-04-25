@@ -1,0 +1,95 @@
+openapi: 3.0.0
+info:
+  title: Solar system
+  description: Information about Solar system
+  version: 1.0.0
+servers:
+  - url: /api
+
+paths:
+  /planets:
+    get:
+      summary: Get all information about planets
+      operationId: api.read_all
+      responses:
+        "200":
+          description: Successfully retrieved
+        "404":
+          description: Something is wrong
+    post:
+      summary: Create a new planet
+      operationId: api.create_planets
+      requestBody:
+        description: Create a new planet
+        content:
+          application/json:
+            schema:
+              x-body-name: planet
+              $ref: "#/components/schemas/Planet"
+      responses:
+        "201":
+          description: Successfully created
+        "409":
+          description: Planet with provided name already exists
+  /planets/{planet_id}:
+    get:
+      summary: Read one planet
+      operationId: api.read_one_planets
+      parameters:
+        - $ref: "#/components/parameters/planet_id"
+      responses:
+        "200":
+          description: Successfully read one planet
+    delete:
+      summary: Delete one planet
+      operationId: api.delete_planets
+      parameters:
+        - $ref: "#/components/parameters/planet_id"
+      responses:
+        "200":
+          description: Successfully deleted planet
+        "404":
+          description: Planet does not exist
+    put:
+      summary: Update one planet
+      operationId: api.update_planets
+      parameters:
+        - $ref: "#/components/parameters/planet_id"
+      requestBody:
+        description: Create a new planet
+        content:
+          application/json:
+            schema:
+              x-body-name: planet
+              $ref: "#/components/schemas/Planet"
+      responses:
+        "200":
+          description: Successfully updated planet information
+components:
+  schemas:
+    Planet:
+      required:
+        - id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        orbital_period_days:
+          type: integer
+        average_speed_kms:
+          type: integer
+        satellites:
+          type: integer
+        mean_radius:
+          type: integer
+        temperature_c:
+          type: integer
+  parameters:
+    planet_id:
+      name: planet_id
+      description: Planet ID
+      in: path
+      required: true
+      schema:
+        type: string
