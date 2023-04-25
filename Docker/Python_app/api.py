@@ -27,4 +27,3 @@ def delete_planets(id):
 
 def update_planets(id, planets):
     return db_data.update_planets(id, planets), 200
-
