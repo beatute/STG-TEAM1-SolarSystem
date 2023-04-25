@@ -34,7 +34,7 @@ def create_new_planets(planets):
 
 
 def get_one_planet(id):
-    with db.crete_connection() as conn:
+    with db.create_connection() as conn:
         with conn.cursor() as cursor:
             cursor.execute("SELECT id, name, orbital_period_days, average_speed_kms, satellites,  mean_radius, "
                            "temperature_c"
@@ -55,7 +55,7 @@ def get_one_planet(id):
 
 
 def delete_planets(id):
-    with db.crete_connection() as conn:
+    with db.create_connection() as conn:
         with conn.cursor() as cursor:
             delete_query = "DELETE FROM planets WHERE id ='" + id + "'"
             cursor.execute(delete_query)
@@ -64,7 +64,7 @@ def delete_planets(id):
 
 
 def update_planets(id, planets):
-    with db.crete_connection() as conn:
+    with db.create_connection() as conn:
         with conn.cursor() as cursor:
             update_query = "UPDATE planets SET id = %s, name = %s, orbital_period_days = %s, average_speed_kms = %s, satellites = %s," \
                            "mean_radius = %s, temperature_c = %s WHERE id = %s"
