@@ -4,7 +4,7 @@ def get_all_planets():
     planets_list = []
     with db.create_connection() as conn:
         with conn.cursor() as cursor:
-            cursor.execute("SELECT id, name, `orbital period days`, `average speed kms`, 'satellites', 'mean radius', `temperature c` FROM planets")
+            cursor.execute("SELECT id, name, orbital_period_days, average_speed_kms, satellites, mean_radius, temperature_c FROM planets")
             for planets in cursor.fetchall():
                 planets_dict = {
                     'id': planets[0],
@@ -25,8 +25,8 @@ def create_new_planets(planets):
 
     with db.create_connection() as connection:
         with connection.cursor() as cursor:
-            query = "INSERT INTO planets (id, name, `orbital period days`, `average speed kms`,'satellites', mean radius, " \
-                    "`temperature c`) VALUES (%s, %s, %s, %s, %s, %s, %s;);"
+            query = "INSERT INTO planets (id, name, orbital period days, average speed kms,satellites, mean radius, " \
+                    "temperature c) VALUES (%s, %s, %s, %s, %s, %s, %s;);"
             values = (planets['id'], planets['name'], planets['orbital period days'],  planets['average speed kms'], planets['satelittes'], planets['mean radius'], planets['temperature c'])
             cursor.execute(query, values)
             connection.commit()
@@ -36,8 +36,8 @@ def create_new_planets(planets):
 def get_one_planet(id):
     with db.crete_connection() as conn:
         with conn.cursor() as cursor:
-            cursor.execute("SELECT id, name, `orbital period days`, `average speed kms`, satellites,  mean radius, "
-                           "`temperature c`"
+            cursor.execute("SELECT id, name, orbital period days, average speed kms, satellites,  mean radius, "
+                           "temperature c"
                            "FROM planets WHERE id ='" + id + "'")
             planets = cursor.fetchone()
             if planets is not None:
