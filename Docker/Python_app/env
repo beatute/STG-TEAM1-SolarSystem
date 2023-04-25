@@ -1,4 +1,4 @@
-DB_USER= root
-DB_PASSWORD= sgt2023
-DB_HOST= mysql
-DB_NAME= solar_system
+DB_USER=root
+DB_PASSWORD=sgt2023
+DB_HOST=mysql
+DB_NAME=solar_system
