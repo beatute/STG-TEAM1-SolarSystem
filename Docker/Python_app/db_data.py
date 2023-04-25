@@ -36,9 +36,7 @@ def create_new_planets(planets):
 def get_one_planet(id):
     with db.create_connection() as conn:
         with conn.cursor() as cursor:
-            cursor.execute("SELECT id, name, orbital_period_days, average_speed_kms, satellites,  mean_radius, "
-                           "temperature_c"
-                           "FROM planets WHERE id ='" + id + "'")
+            cursor.execute("SELECT id, name, orbital_period_days, average_speed_kms, satellites, mean_radius, temperature_c FROM planets WHERE id = " + str(id))
             planets = cursor.fetchone()
             if planets is not None:
                 return {
