@@ -69,7 +69,7 @@ components:
   schemas:
     Planet:
       required:
-        - id
+        - name
       properties:
         id:
           type: string
