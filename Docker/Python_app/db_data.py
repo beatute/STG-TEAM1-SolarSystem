@@ -25,9 +25,8 @@ def create_new_planets(planets):
 
     with db.create_connection() as connection:
         with connection.cursor() as cursor:
-            query = "INSERT INTO planets (id, name, orbital_period_days, average_speed_kms,satellites, mean_radius, " \
-                    "temperature_c) VALUES (%s, %s, %s, %s, %s, %s, %s;);"
-            values = (planets['id'], planets['name'], planets['orbital_period_days'],  planets['average_speed_kms'], planets['satelittes'], planets['mean_radius'], planets['temperature_c'])
+            query = "INSERT INTO planets (id, name, orbital_period_days, average_speed_kms, satellites, mean_radius, temperature_c) VALUES (%s, %s, %s, %s, %s, %s, %s);"
+            values = (planets['id'], planets['name'], planets['orbital_period_days'],  planets['average_speed_kms'], planets['satellites'], planets['mean_radius'], planets['temperature_c'])
             cursor.execute(query, values)
             connection.commit()
     return planets, 201
@@ -36,7 +35,7 @@ def create_new_planets(planets):
 def get_one_planet(id):
     with db.create_connection() as conn:
         with conn.cursor() as cursor:
-            cursor.execute("SELECT id, name, orbital_period_days, average_speed_kms, satellites, mean_radius, temperature_c FROM planets WHERE id = " + str(id))
+            cursor.execute("SELECT id, name, orbital_period_days, average_speed_kms, satellites, mean_radius, temperature_c FROM planets WHERE id = " + id + "")
             planets = cursor.fetchone()
             if planets is not None:
                 return {
@@ -64,8 +63,7 @@ def delete_planets(id):
 def update_planets(id, planets):
     with db.create_connection() as conn:
         with conn.cursor() as cursor:
-            update_query = "UPDATE planets SET id = %s, name = %s, orbital_period_days = %s, average_speed_kms = %s, satellites = %s," \
-                           "mean_radius = %s, temperature_c = %s WHERE id = %s"
+            update_query = "UPDATE planets SET id = %s, name = %s, orbital_period_days = %s, average_speed_kms = %s, satellites = %s, mean_radius = %s, temperature_c = %s WHERE id = %s"
             values = (planets['name'], planets['orbital_period_days'], planets['average_speed_kms'], planets['satellites'], planets['mean_radius'], planets['temperature_c'], id)
             cursor.execute(update_query, values)
             conn.commit()
