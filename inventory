@@ -1,5 +1,0 @@
-[sgt]
-BEATAB_ANSIBLE ansible_host=16.170.168.144
-
-[sgt:vars]
-ansible_user=ubuntu
