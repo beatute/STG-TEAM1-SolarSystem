@@ -18,7 +18,7 @@
     state: directory
     owner: solaruser
     group: admin
-    mode: "0700"
+    mode: "0755"
 
 - name: Ensure PubkeyAuthentication is set to yes in sshd_config
   ansible.builtin.lineinfile:
@@ -28,9 +28,9 @@
 
 - name: Set authorized key taken from file
   ansible.posix.authorized_key:
-    user: sgtuser
+    user: solaruser
     state: present
-    key: keybeata, /home/sgtuser/
+    key: "{{ lookup('file', ssh_key_path) }}"
 
 - name: Restart sshd
   ansible.builtin.systemd:
