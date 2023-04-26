@@ -12,7 +12,7 @@ def create_planets(planets):
     return planets, status_code
 
 
-def read_one_planets(id):
+def read_one_planets(planet_id):
     return db_data.get_one_planet(planet_id), 200
 
 
