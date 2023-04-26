@@ -1,15 +1,15 @@
 - name: Wait for MySQL container to become ready
   wait_for:
     host: "localhost"
-    port: 3308
+    port: 3307
     delay: 20
     timeout: 120
 
 
 - name: Copy backup.sql from host to MySQL container
-  command: docker cp /home/solaruser/solarsystem/backup_file.sql docker_db_1:tmp/backup_file.sql
+  command: docker cp /home/solaruser/solarsystem/Docker/backup_file_CR.sql mysql:tmp/backup_file.sql
 
 - name: Import backup.sql into MySQL container
-  shell: docker exec -i docker_db_1 bash -c 'cat /tmp/backup_file.sql | mysql -u root -SGT2023 db'
+  shell: docker exec -i mysql bash -c 'cat /tmp/backup_file.sql | mysql -u root -psgt2023 solar_system'
   args:
     executable: /bin/bash
