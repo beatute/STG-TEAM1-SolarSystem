@@ -18,7 +18,7 @@ paths:
           description: Something is wrong
     post:
       summary: Create a new planet
-      operationId: api.create_planets
+      operationId: api.create_planet
       requestBody:
         description: Create a new planet
         content:
@@ -31,20 +31,20 @@ paths:
           description: Successfully created
         "409":
           description: Planet with provided name already exists
-  /planets/{planet_id}:
+  /planets/{name}:
     get:
       summary: Read one planet
-      operationId: api.read_one_planets
+      operationId: api.read_one_planet
       parameters:
-        - $ref: "#/components/parameters/planet_id"
+        - $ref: "#/components/parameters/name"
       responses:
         "200":
           description: Successfully read one planet
     delete:
       summary: Delete one planet
-      operationId: api.delete_planets
+      operationId: api.delete_planet
       parameters:
-        - $ref: "#/components/parameters/planet_id"
+        - $ref: "#/components/parameters/name"
       responses:
         "200":
           description: Successfully deleted planet
@@ -52,9 +52,9 @@ paths:
           description: Planet does not exist
     put:
       summary: Update one planet
-      operationId: api.update_planets
+      operationId: api.update_planet
       parameters:
-        - $ref: "#/components/parameters/planet_id"
+        - $ref: "#/components/parameters/name"
       requestBody:
         description: Create a new planet
         content:
@@ -69,26 +69,24 @@ components:
   schemas:
     Planet:
       required:
-        - id
+        - name
       properties:
-        id:
-          type: string
         name:
           type: string
         orbital_period_days:
-          type: integer
+          type: string
         average_speed_kms:
-          type: integer
+          type: string
         satellites:
-          type: integer
+          type: string
         mean_radius:
-          type: integer
+          type: string
         temperature_c:
-          type: integer
+          type: string
   parameters:
-    planet_id:
-      name: planet_id
-      description: Planet ID
+    name:
+      name: name
+      description: planet name
       in: path
       required: true
       schema:
