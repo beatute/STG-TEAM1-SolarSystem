@@ -1,7 +1,6 @@
 - name: Run Docker Compose in a specific directory
   command: docker-compose up -d
   args:
-    chdir: /usr/local/bin/docker-compose
+    chdir: /home/solaruser/solarsystem/Docker
   become: true
-  become_user: solaruser
-
+  become_user: root
