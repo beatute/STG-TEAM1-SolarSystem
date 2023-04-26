@@ -1,15 +1,16 @@
-- name: "Update all installed packages"
+- name: Install required system packages
   apt:
-    name: '*'
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python3-pip
+      - virtualenv
+      - python3-setuptools
     state: latest
-    update_cache: yes
-    only_upgrade: yes
-  register: apt_update_status
+    update_cache: true
 
-- name: "install git"
-  package:
-    name: git
-    state: present
 
 - name: Add Docker GPG apt Key
   apt_key:
