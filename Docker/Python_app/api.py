@@ -3,28 +3,26 @@ from flask import make_response
 
 
 def read_all():
-    return db_data.get_all_planets(), 200
+    return db_data.get_all_planet(), 200
 
 
-def create_planets(planets):
-    status_code = None
-    planets, status_code = db_data.create_new_planets(planets)
-    return planets, status_code
+def create_planet(planet):
+    planet, status_code = db_data.create_new_planet(planet)
+    return planet, status_code
 
 
-def read_one_planets(id):
-    return db_data.get_one_planet(planet_id), 200
+def read_one_planet(name):
+    return db_data.get_one_planet(name), 200
 
 
-def delete_planets(planet_id):
-    rows_affected = db_data.delete_planets(planet_id)
+def delete_planet(name):
+    rows_affected = db_data.delete_planet(name)
 
     if rows_affected > 0:
-        return make_response(f"{planet_id} planet successfully deleted", 200)
+        return make_response(f"{name} planet successfully deleted", 200)
     else:
-        return make_response(f"Deletion of {planet_id} failed. Planet not found.", 404)
+        return make_response(f"Deletion of {name} failed. Planet not found.", 404)
 
 
-def update_planets(planet_id, planets):
-    return db_data.update_planets(planet_id, planets), 200
-
+def update_planet(name, planet):
+    return db_data.update_planet(name, planet), 200
