@@ -50,6 +50,6 @@ resource "aws_instance" "team1_solar_system" {
 
 
   provisioner "local-exec" {
-  command = "sleep 60 && ansible-playbook -i '${aws_instance.team1_solar_system.public_ip},' -e ip_address=${aws_instance.team1_solar_system.public_ip} final_playbook.yml --user ${var.aws_instance_user_id} --private-key ${var.private_key_path}"
+    command = "sleep 60 && ansible-playbook -i '${aws_instance.team1_solar_system.public_ip},' final_playbook.yml -e ${var.aws_instance_user_id} --user ubuntu --private-key ${var.private_key_path}"
 }
 }
